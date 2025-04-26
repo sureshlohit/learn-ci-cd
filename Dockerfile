@@ -23,7 +23,7 @@ FROM nginx:alpine
 COPY --from=build /app/dist/angular-copilot /usr/share/nginx/html
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 70
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
