@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Run tests
-                    bat 'npm test'
+                    bat 'npm test --watch=false'
                 }
             }
         }
