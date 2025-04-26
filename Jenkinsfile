@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent  {
+        label 'learning'
+        } // Use a Windows agent for Node.js}
 
     stages {
         stage('Install Dependencies') {
