@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Run tests
-                    bat 'npm test --watch=false'
+                    bat 'ng test --watch=false --browsers=ChromeHeadlessNoSandbox && echo "Tests completed"'
                 }
             }
         }
