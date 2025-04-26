@@ -1,7 +1,14 @@
 pipeline {
-    agent  {
+     agent  {
         label 'learning'
-        } // Use a Windows agent for Node.js}
+        }
+
+    environment {
+        DOCKER_IMAGE = 'suresh176/vetri-learning' // Replace with your Docker Hub username and repository name
+        DOCKER_TAG = 'latest'
+	DOCKER_PASSWORD = 'Welcomedhiya@1'
+	DOCKER_USERNAME = 'suresh176'
+    }
 
     stages {
         stage('Install Dependencies') {
@@ -20,19 +27,22 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    // Run tests
-                    bat 'ng test --watch=false --browsers=ChromeHeadlessNoSandbox && echo "Tests completed"'
+                    // Build the Docker image
+                    bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
         }
-        stage('Deploy') {
+        stage('Push Docker Image') {
             steps {
                 script {
-                    // Deploy the application (customize this step as needed)
-                    echo 'Deploying application...'
+                    // Log in to Docker Hub
+                    bat 'echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin'
+
+                    // Push the Docker image
+                    bat "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
                 }
             }
         }
