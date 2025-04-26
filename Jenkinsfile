@@ -3,12 +3,7 @@ pipeline {
         label 'learning'
         } // Use a Windows agent for Node.js}
 
-    stages {
-        stage('Cleanup') {
-            steps {
-                cleanWs()
-            }
-        }
+    stages { 
         stage('Install Dependencies') {
             steps {
                 script {
