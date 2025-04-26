@@ -4,6 +4,11 @@ pipeline {
         } // Use a Windows agent for Node.js}
 
     stages {
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 script {
